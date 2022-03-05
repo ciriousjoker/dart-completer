@@ -9,8 +9,8 @@ export class Completer<T = void> {
   }
   private _isCompleted = false;
 
-  public _complete!: (value: PromiseLike<T> | T) => void;
-  public _completeError!: (reason?: any) => void;
+  private _complete!: (value: PromiseLike<T> | T) => void;
+  private _completeError!: (reason?: any) => void;
 
   public complete(value: T | PromiseLike<T>) {
     if (this._isCompleted) return;
