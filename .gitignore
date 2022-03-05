@@ -5,3 +5,4 @@ coverage/*
 !coverage/badge-functions.svg
 !coverage/badge-lines.svg
 !coverage/badge-statements.svg
+dist

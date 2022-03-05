@@ -2,11 +2,13 @@
   "name": "dart-completer",
   "version": "1.0.3",
   "description": "A Typescript port of Dart's Completer.",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest",
     "test:coverage": "npm test -- --coverage",
-    "test:badges": "npm run test:coverage  && jest-coverage-badges && make-coverage-badge"
+    "test:badges": "npm run test:coverage  && jest-coverage-badges && make-coverage-badge",
+    "prepublish": "tsc"
   },
   "repository": {
     "type": "git",
