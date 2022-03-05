@@ -1,7 +1,7 @@
 # Dart Completer
 
 [![npm](https://img.shields.io/npm/l/dart-completer.svg)](https://github.com/ciriousjoker/dart-completer/blob/main/LICENSE)
-![npm](coverage/badge.svg)
+![npm](https://ciriousjoker.github.io/dart-completer/coverage/badge.svg)
 
 A Typescript port of Dart's Completer.
 
