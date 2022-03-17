@@ -22,6 +22,7 @@ setTimeout(() => {
 }, 1000);
 
 await completer.promise; // => Completes after 1 second.
+await completer; // => Alternative, identical syntax
 ```
 
 #### With value
@@ -33,5 +34,6 @@ setTimeout(() => {
   completer.complete("done.");
 }, 1000);
 
-const result = await completer.promise; // => result == "done."
+const a = await completer.promise; // => "done."
+const b = await completer;         // => "done."
 ```
