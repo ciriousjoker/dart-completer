@@ -1,3 +1,7 @@
+## [1.1.1] - 2022-03-17
+
+- Improved README
+
 ## [1.1.0] - 2022-03-16
 
 - Feature: await completer;
