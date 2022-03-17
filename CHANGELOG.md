@@ -1,3 +1,8 @@
+## [1.1.0] - 2022-03-16
+
+- Feature: await completer;
+- Add tests
+
 ## [1.0.4] - 2022-03-05
 
 - Fix npm package build.
