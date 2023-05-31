@@ -10,6 +10,11 @@
     "test:badges": "npm run test:coverage  && jest-coverage-badges && make-coverage-badge",
     "prepublish": "npx tsc"
   },
+  "exports": "./dist/index.js",
+  "type": "module",
+  "engines": {
+    "node": ">=16"
+  },
   "sideEffects": false,
   "repository": {
     "type": "git",
