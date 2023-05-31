@@ -10,6 +10,7 @@
     "test:badges": "npm run test:coverage  && jest-coverage-badges && make-coverage-badge",
     "prepublish": "tsc"
   },
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ciriousjoker/dart-completer.git"
