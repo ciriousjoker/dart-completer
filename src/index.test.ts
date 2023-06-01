@@ -4,7 +4,7 @@ type TestValue = "Hello World!";
 const value: TestValue = "Hello World!";
 
 test("Complete via timeout.", async () => {
-  await testVariant(async variant => {
+  await testVariant(async (variant) => {
     const completer = new Completer();
 
     let check = false;
@@ -23,7 +23,7 @@ test("Complete via timeout.", async () => {
 });
 
 test("Complete via timeout with value.", async () => {
-  await testVariant(async variant => {
+  await testVariant(async (variant) => {
     const completer = new Completer<TestValue>();
 
     setTimeout(() => {
@@ -36,7 +36,7 @@ test("Complete via timeout with value.", async () => {
 });
 
 test("Complete via timeout with promise.", async () => {
-  await testVariant(async variant => {
+  await testVariant(async (variant) => {
     const completer = new Completer<TestValue>();
     const completer2 = new Completer<TestValue>();
 
@@ -54,7 +54,7 @@ test("Complete via timeout with promise.", async () => {
 });
 
 test("Complete via timeout with promise (reverse).", async () => {
-  await testVariant(async variant => {
+  await testVariant(async (variant) => {
     const value: TestValue = "Hello World!";
 
     const completer = new Completer<TestValue>();
@@ -74,7 +74,7 @@ test("Complete via timeout with promise (reverse).", async () => {
 });
 
 test("Complete immediately, if the completer has already been commpleted.", async () => {
-  await testVariant(async variant => {
+  await testVariant(async (variant) => {
     const completer = new Completer();
     completer.complete();
     expect(completer.isCompleted).toBe(true);
@@ -91,12 +91,10 @@ test("Complete immediately, if the completer has already been commpleted.", asyn
   });
 });
 
-
 test("Don't crash when trying to complete()/completeError() after complete().", async () => {
-  await testVariant(async variant => {
+  await testVariant(async (variant) => {
     const completer = new Completer();
     completer.complete();
-
 
     setTimeout(() => {
       completer.complete();
@@ -116,9 +114,8 @@ test("Don't crash when trying to complete()/completeError() after complete().", 
   });
 });
 
-
 test("Don't crash when trying to complete()/completeError() after completeError().", async () => {
-  await testVariant(async variant => {
+  await testVariant(async (variant) => {
     const completer = new Completer();
 
     const error1 = "This should be thrown";
@@ -142,7 +139,7 @@ test("Don't crash when trying to complete()/completeError() after completeError(
 });
 
 test("completeError() should throw.", async () => {
-  await testVariant(async variant => {
+  await testVariant(async (variant) => {
     const completer = new Completer();
 
     const error = "Some error message.";
@@ -162,7 +159,7 @@ test("completeError() should throw.", async () => {
 });
 
 test(".then()", async () => {
-  await testVariant(async variant => {
+  await testVariant(async (variant) => {
     const completer = new Completer<string>();
 
     const val = "this should be returned in .then()";
@@ -174,7 +171,7 @@ test(".then()", async () => {
     let isThenCalled = false;
 
     // Check if .catch() and .finally() is called
-    promiseFrom(completer, variant).then(v => {
+    promiseFrom(completer, variant).then((v) => {
       isThenCalled = true;
       expect(completer.isCompleted).toBe(true);
       expect(v).toStrictEqual(val);
@@ -188,7 +185,7 @@ test(".then()", async () => {
 });
 
 test(".catch(), .finally()", async () => {
-  await testVariant(async variant => {
+  await testVariant(async (variant) => {
     const completer = new Completer();
 
     const error = "Some error message.";
@@ -202,15 +199,17 @@ test(".catch(), .finally()", async () => {
 
     try {
       // This needs to be awaited so finally has time to run.
-      await promiseFrom(completer, variant).catch(e => {
-        isCatchCalled = true;
-        expect(completer.isCompleted).toBe(true);
-        expect(e).toStrictEqual(error);
-      }).finally(() => {
-        isFinallyCalled = true;
-        expect(completer.isCompleted).toBe(true);
-      });
-    } catch (_) { }
+      await promiseFrom(completer, variant)
+        .catch((e) => {
+          isCatchCalled = true;
+          expect(completer.isCompleted).toBe(true);
+          expect(e).toStrictEqual(error);
+        })
+        .finally(() => {
+          isFinallyCalled = true;
+          expect(completer.isCompleted).toBe(true);
+        });
+    } catch (_) {}
 
     expect(completer.isCompleted).toBe(true);
     expect(isCatchCalled).toBe(true);
@@ -219,7 +218,7 @@ test(".catch(), .finally()", async () => {
 });
 
 test(".finally()", async () => {
-  await testVariant(async variant => {
+  await testVariant(async (variant) => {
     const completer = new Completer();
 
     setTimeout(() => {
@@ -239,7 +238,7 @@ test(".finally()", async () => {
     try {
       // This just makes sure the test doesn't fail due to an unhandled rejection
       await promiseFrom(completer, variant);
-    } catch (_) { }
+    } catch (_) {}
 
     expect(completer.isCompleted).toBe(true);
     expect(isFinallyCalled).toBe(true);
