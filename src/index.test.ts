@@ -1,4 +1,4 @@
-import { Completer } from "../src";
+import { Completer } from "./index";
 
 type TestValue = "Hello World!";
 const value: TestValue = "Hello World!";
